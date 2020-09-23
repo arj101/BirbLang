@@ -2125,7 +2125,21 @@ Future<ASTNode> visitFor(Runtime runtime, ASTNode node) async {
   return node;
 }
 
-Future<ASTNode> visitNew(Runtime runtime, ASTNode node) async => (await visit(runtime, node.newValue)).copy();
+Future<ASTNode> visitNew(Runtime runtime, ASTNode node) async {
+  final ASTNode newNode =  (await visit(runtime, node.newValue)).copy();
+  
+  if (newNode is ClassNode) {
+    newNode.classChildren.forEach((element) { 
+      if (element is FuncDefNode) {
+        if (element.funcName == 'constructor') {
+          visit(runtime, element.functionDefBody);
+        }
+      }
+    });
+  }
+
+  return newNode;
+}
 
 Future<ASTNode> visitIterate(Runtime runtime, ASTNode node) async {
   final scope = getScope(runtime, node);
