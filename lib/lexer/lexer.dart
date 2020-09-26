@@ -264,16 +264,7 @@ Token getNextToken(Lexer lexer) {
         const TokenType type = TokenType.TOKEN_SEMI;
         advance(lexer);
 
-        if (lexer.currentChar == ';') {
-          int extras = 0;
-
-          while(lexer.currentChar == ';'){
-            extras++;
-            advance(lexer);
-          }
-
-          print(Warning('Unnecessary trailing semicolons', lexer.program, 'remove these extra semicolons', lexer.lineNum, extras, lexer.currentIndex, lexer.fileName));
-        }
+        checkExtraSemicolons(lexer);
         
         return initToken(type, value);
       case ',':
@@ -562,5 +553,18 @@ extension on String {
     .replaceAll(r'$', '\x1B[');
 
     return escapedString;
+  }
+}
+
+void checkExtraSemicolons(lexer) {
+  if (lexer.currentChar == ';') {
+    int extras = 0;
+
+    while(lexer.currentChar == ';'){
+      extras++;
+      advance(lexer);
+    }
+
+    print(Warning('Unnecessary trailing semicolons', lexer.program, 'remove these extra semicolons', lexer.lineNum, extras, lexer.currentIndex, lexer.fileName));
   }
 }
