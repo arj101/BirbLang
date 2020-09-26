@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:Birb/birb.dart';
 import 'package:Birb/utils/exceptions.dart';
 import 'package:Birb/lexer/token.dart';
