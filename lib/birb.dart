@@ -7,6 +7,12 @@ import 'package:Birb/lexer/lexer.dart';
 import 'package:Birb/parser/parser.dart';
 import 'package:Birb/runtime/runtime.dart';
 
+void _defaultbirbWarn(Warning warning) { 
+  stderr.write(warning);
+}
+
+void Function(Warning warning) birbWarn = _defaultbirbWarn;
+
 Future<void> main(List<String> arguments) async {
   /// If no file path is specified the birb shell will
   /// start up allowing developers to write programs directly from their terminal

@@ -1,13 +1,33 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:Birb/birb.dart';
 import 'package:Birb/lexer/lexer.dart';
 import 'package:Birb/lexer/token.dart';
+import 'package:Birb/utils/exceptions.dart';
 import 'package:test/test.dart' as test;
 
 void main() {
   test.test('Lexer handles empty input correctly', () {
     final Lexer lexer = initLexer('', '<test>');
     test.expect(getNextToken(lexer).type, test.equals(TokenType.TOKEN_EOF));
+  });
+
+  test.test('Check Warnings: Unnecessary trailing semicolons', () {
+    final warnings = <Warning>[];
+
+    birbWarn = (Warning w) {
+      warnings.add(w);
+    };
+
+    final lexer = initLexer(';;;;scremLn("Test");;', '<test>');
+    while (true) {
+      if (getNextToken(lexer).type == TokenType.TOKEN_EOF) {
+        break;
+      }
+    }
+    
+    test.expect(warnings.length, 2);
   });
 
   test.test('Lexer handles equal char after double char tokens correctly', () {

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:Birb/birb.dart';
 import 'package:Birb/utils/exceptions.dart';
 import 'package:Birb/lexer/token.dart';
 
@@ -565,6 +568,6 @@ void checkExtraSemicolons(lexer) {
       advance(lexer);
     }
 
-    print(Warning('Unnecessary trailing semicolons', lexer.program, 'remove these extra semicolons', lexer.lineNum, extras, lexer.currentIndex, lexer.fileName));
+    birbWarn(Warning('Unnecessary trailing semicolons', lexer.program, 'remove these extra semicolons', lexer.lineNum, extras, lexer.currentIndex, lexer.fileName));
   }
 }
