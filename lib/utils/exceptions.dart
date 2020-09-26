@@ -205,6 +205,8 @@ class Warning{
 
   @override
   String toString() {
+    print(posEnd);
+    print(index);
     return '\u001b[33mWarning:\u001b[0m $warn\n\u001b[34;1m${"-" * 2}> $fileName:$lineNum:$index\u001b[0m\n${ '  |\n' * warn.split('\n').length * 2}${lineNum.toString()} |$program\n  |${' ' * (index - posEnd)}${'^' * posEnd}\n${'  |\n' * warn.split('\n').length * 2}help:$help';
   }
 }
