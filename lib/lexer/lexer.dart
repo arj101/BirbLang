@@ -1,20 +1,21 @@
 import 'package:Birb/utils/exceptions.dart';
-
 import 'package:Birb/lexer/token.dart';
 
 class Lexer {
   String program;
   String currentChar;
+  String fileName;
   int currentIndex;
   int lineNum;
 }
 
 /// Initializes and returns a new lexer
-Lexer initLexer(String program) {
+Lexer initLexer(String program, String fileName) {
   final lexer = Lexer()
     ..program = program.trim()
     ..currentIndex = 0
-    ..lineNum = 1;
+    ..lineNum = 1
+    ..fileName = fileName;
   lexer.currentChar = program.isEmpty ? '' : lexer.program[lexer.currentIndex];
 
   return lexer;
@@ -259,7 +260,21 @@ Token getNextToken(Lexer lexer) {
       case ']':
         return advanceWithToken(lexer, TokenType.TOKEN_RBRACKET);
       case ';':
-        return advanceWithToken(lexer, TokenType.TOKEN_SEMI);
+        final String value = lexer.currentChar;
+        const TokenType type = TokenType.TOKEN_SEMI;
+        advance(lexer);
+
+        if (lexer.currentChar == ';') {
+          int extras = 0;
+
+          while(lexer.currentChar == ';')
+            advance(lexer);
+            extras++;
+
+          print(Warning('Unnecessary trailing semicolons', lexer.program, 'remove these extra semicolons', lexer.lineNum, extras, lexer.currentIndex, lexer.fileName));
+        }
+        
+        return initToken(type, value);
       case ',':
         return advanceWithToken(lexer, TokenType.TOKEN_COMMA);
       case '.':

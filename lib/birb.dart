@@ -51,7 +51,7 @@ Future<void> main(List<String> arguments) async {
         }
 
         // Initialize and run program
-        lexer = initLexer(str);
+        lexer = initLexer(str, '<stdin>');
         parser = initParser(lexer);
         node = parse(parser);
         await visit(runtime, node);
@@ -91,7 +91,7 @@ Future<void> main(List<String> arguments) async {
       }
     }
 
-    lexer = initLexer(program);
+    lexer = initLexer(program, arguments[0]);
     parser = initParser(lexer);
     node = parse(parser);
     await visit(runtime, node);

@@ -55,7 +55,7 @@ Future<ASTNode> funcGrab(Runtime runtime, ASTNode self, List<ASTNode> args) asyn
     final String fileName = astStr.stringValue.split(':')[1];
     final String ps = Platform.pathSeparator;
 
-    final Lexer lexer = initLexer(File('${Directory.current.path}${ps}core$ps$fileName$ps$fileName.birb').readAsStringSync());
+    final Lexer lexer = initLexer(File('${Directory.current.path}${ps}core$ps$fileName$ps$fileName.birb').readAsStringSync(), fileName);
     final Parser parser = initParser(lexer);
     final ASTNode node = parse(parser);
     await visit(runtime, node);
@@ -87,7 +87,7 @@ Future<ASTNode> funcGrab(Runtime runtime, ASTNode self, List<ASTNode> args) asyn
       throw const UnexpectedTokenException('Cannot import non-birb files.');
 
     final Response response = await get(astStr.stringValue);
-    final Lexer lexer = initLexer(response.body);
+    final Lexer lexer = initLexer(response.body, astStr.stringValue);
     final Parser parser = initParser(lexer);
     final ASTNode node = parse(parser);
     await visit(runtime, node);
@@ -96,7 +96,7 @@ Future<ASTNode> funcGrab(Runtime runtime, ASTNode self, List<ASTNode> args) asyn
   }
   final String filename = '$filePath${Platform.pathSeparator}${astStr.stringValue}';
 
-  final Lexer lexer = initLexer(File(filename).readAsStringSync());
+  final Lexer lexer = initLexer(File(filename).readAsStringSync(), filename);
   final Parser parser = initParser(lexer);
   final ASTNode node = parse(parser);
   await visit(runtime, node);

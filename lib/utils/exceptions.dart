@@ -191,3 +191,20 @@ class NoSuchMethodException implements BirbException {
   @override
   String toString() => 'NoSuchMethodException: No such method `$methodName` for `$typeName`';
 }
+
+class Warning{
+  Warning(this.warn, this.program, this.help, this.lineNum, this.posEnd, this.index, this.fileName);
+  
+  final String warn;
+  final String program;
+  final String help;
+  final int lineNum;
+  final int posEnd;
+  final int index;
+  final String fileName;
+
+  @override
+  String toString() {
+    return '\u001b[33mWarning:\u001b[0m $warn\n\u001b[34;1m${"-" * 2}> $fileName:$lineNum:$index\u001b[0m\n${ '  |\n' * warn.split('\n').length * 2}${lineNum.toString()} |$program\n  |${' ' * (index - posEnd)}${'^' * posEnd}\n${'  |\n' * warn.split('\n').length * 2}help:$help';
+  }
+}
