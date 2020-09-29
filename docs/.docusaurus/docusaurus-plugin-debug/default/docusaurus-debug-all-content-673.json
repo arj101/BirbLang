@@ -8,8 +8,8 @@
           "versionPath": "/docs",
           "isLast": true,
           "routePriority": -1,
-          "sidebarFilePath": "C:\\Users\\user\\Desktop\\Andy\\Projects\\BirbLang\\docs\\sidebars.js",
-          "docsDirPath": "C:\\Users\\user\\Desktop\\Andy\\Projects\\BirbLang\\docs\\docs",
+          "sidebarFilePath": "C:\\Users\\user\\Desktop\\Andy\\Projects\\Birb\\BirbLang\\docs\\sidebars.js",
+          "docsDirPath": "C:\\Users\\user\\Desktop\\Andy\\Projects\\Birb\\BirbLang\\docs\\docs",
           "mainDocId": "tour",
           "sidebars": {
             "BirbLang": [
@@ -214,8 +214,8 @@
           "versionPath": "/community",
           "isLast": true,
           "routePriority": -1,
-          "sidebarFilePath": "C:\\Users\\user\\Desktop\\Andy\\Projects\\BirbLang\\docs\\sidebarsCommunity.js",
-          "docsDirPath": "C:\\Users\\user\\Desktop\\Andy\\Projects\\BirbLang\\docs\\community",
+          "sidebarFilePath": "C:\\Users\\user\\Desktop\\Andy\\Projects\\Birb\\BirbLang\\docs\\sidebarsCommunity.js",
+          "docsDirPath": "C:\\Users\\user\\Desktop\\Andy\\Projects\\Birb\\BirbLang\\docs\\community",
           "mainDocId": "support",
           "sidebars": {
             "community": [
