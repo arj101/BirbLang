@@ -66,38 +66,63 @@ Future<void> main(List<String> arguments) async {
     return;
   }
 
-  // Initialize and run program
-  final String program = File(arguments[0]).readAsStringSync().trim();
+  else {
+    if (arguments[0] == '-v' || arguments[0] == '--version') {
+      print('Birb 0.0.1');
 
-  try {
-    if (RegExp('{').allMatches(program).length !=
-        RegExp('}').allMatches(program).length) {
-      final int lParenCount = RegExp('{').allMatches(program).length;
-      final Iterable<RegExpMatch> rParenMatches = RegExp('}').allMatches(program);
-      final int rParenCount = rParenMatches.length;
-
-      if (lParenCount > rParenCount) {
-        throw UnexpectedTokenException(
-            '[Line ${program.split('\n').length}] Expected `}`, but got EOF');
-      } else if (lParenCount < rParenCount) {
-        int parenCount = 0;
-        rParenMatches.forEach((e) {
-          parenCount += 1;
-          if (parenCount > lParenCount) {
-            throw UnexpectedTokenException(
-                '[Line ${program.substring(0, e.start).split('\n').length}]');
-          }
-        });
-      }
+      exit(0);
     }
 
-    lexer = initLexer(program);
-    parser = initParser(lexer);
-    node = parse(parser);
-    await visit(runtime, node);
-  } catch (e) {
-    if (e is! BirbException)
-      rethrow;
-    stderr.write(e);
+    else if (arguments[0] == '-c' || arguments[0] == '--cmd') {
+      try {
+        final lexer = initLexer(arguments[1]);
+        final parser = initParser(lexer);
+
+        node = parse(parser);
+        await visit(runtime, node);
+      }
+      catch (e) {
+        if (e is! BirbException)
+          rethrow;
+        stderr.write(e);
+      }
+    }
+    
+    else {
+      // Initialize and run program
+      final String program = File(arguments[0]).readAsStringSync().trim();
+
+      try {
+        if (RegExp('{').allMatches(program).length !=
+            RegExp('}').allMatches(program).length) {
+          final int lParenCount = RegExp('{').allMatches(program).length;
+          final Iterable<RegExpMatch> rParenMatches = RegExp('}').allMatches(program);
+          final int rParenCount = rParenMatches.length;
+
+          if (lParenCount > rParenCount) {
+            throw UnexpectedTokenException(
+                '[Line ${program.split('\n').length}] Expected `}`, but got EOF');
+          } else if (lParenCount < rParenCount) {
+            int parenCount = 0;
+            rParenMatches.forEach((e) {
+              parenCount += 1;
+              if (parenCount > lParenCount) {
+                throw UnexpectedTokenException(
+                    '[Line ${program.substring(0, e.start).split('\n').length}]');
+              }
+            });
+          }
+        }
+
+        lexer = initLexer(program);
+        parser = initParser(lexer);
+        node = parse(parser);
+        await visit(runtime, node);
+      } catch (e) {
+        if (e is! BirbException)
+          rethrow;
+        stderr.write(e);
+      }
+    }
   }
 }
