@@ -566,6 +566,6 @@ void checkExtraSemicolons(lexer) {
       advance(lexer);
     }
 
-    birbWarn(Warning('Unnecessary trailing semicolons', lexer.program, 'remove these extra semicolons', lexer.lineNum, extras, lexer.currentIndex, lexer.fileName));
+    birbWarn(Warning('Unnecessary trailing semicolons', lexer.program, 'remove these extra semicolons', lexer.lineNum, lexer.currentIndex, extras, lexer.fileName));
   }
 }
