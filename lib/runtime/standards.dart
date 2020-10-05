@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:Birb/external/ui.dart';
 import 'package:http/http.dart';
 
 import 'package:Birb/core_types.dart';
@@ -71,6 +72,9 @@ Future<ASTNode> funcGrab(Runtime runtime, ASTNode self, List<ASTNode> args) asyn
         break;
       case 'math':
         registerMath(runtime);
+        break;
+      case 'ui':
+        registerUi(runtime);
         break;
       default:
         throw UnexpectedTokenException('Error [Line ${self.lineNum}]:Dart file $fileName no found.');
