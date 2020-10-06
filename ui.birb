@@ -5,6 +5,6 @@ var app = new Window;
 app.init();
 app.create(400, 400, "Hello World!");
 
-while (app.shouldClose == false) {
+while (app.running()) {
   app.continueLoop()
 }

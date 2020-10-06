@@ -1,50 +1,27 @@
 import 'dart:ffi';
-import 'dart:io';
-import 'package:Birb/parser/data_type.dart';
-import 'package:ffi_utils/ffi_utils.dart';
 import 'package:Birb/ast/ast_node.dart';
 import 'package:Birb/ast/ast_types.dart';
 import 'package:Birb/runtime/runtime.dart';
-
-class GLFWmonitor extends Struct {}
-
-class GLFWwindow extends Struct {}
-
-typedef GlfwCreateWindowNative = Pointer<GLFWwindow> Function(Int32 width, Int32 height, Pointer title, Pointer<GLFWmonitor> monitor, Pointer<GLFWwindow> share);
-typedef GlfwCreateWindow = Pointer<GLFWwindow> Function(int width, int height, Pointer title, Pointer<GLFWmonitor> monitor, Pointer<GLFWwindow> share);
+import 'package:Birb/ui/glfw/glfw.dart';
+import 'package:ffi_utils/ffi_utils.dart';
 
 void registerUi(Runtime runtime) {
   registerGlobalVariable(runtime, 'Window', windowClass(runtime));
 }
 
 ASTNode windowClass(Runtime runtime) {
-  DynamicLibrary dylib;
-
-  var win = null;
-  
-  if (Platform.isMacOS) {
-    dylib = DynamicLibrary.open('lib/glfw3.dylib');
-  }
-
-  if (Platform.isWindows) {
-    dylib = DynamicLibrary.open(r'lib\glfw3.dll');
-  }
-
-  if (Platform.isLinux) {
-    dylib = DynamicLibrary.open('lib/glfw3.so');
-  }
-
   final ClassNode object = ClassNode();
+
+  Pointer windowInstance;
   
   final FuncDefNode init = FuncDefNode();
 
   init.funcName = 'init';
   init.funcPointer = (_, __, ___) {
-    final void Function() initOpenGl = dylib
-      .lookup<NativeFunction<Void Function()>>('glfwInit')
-      .asFunction();
+    initGlfw();
+    glfwInit();
 
-    initOpenGl();
+    return AnyNode();
   };
 
   object.classChildren.add(init);
@@ -55,37 +32,39 @@ ASTNode windowClass(Runtime runtime) {
   create.funcPointer = (Runtime runtime, ASTNode self, List<ASTNode> args) {
     expectArgs(args, [IntNode, IntNode, StringNode]);
 
-    final createWindow = dylib
-      .lookupFunction<GlfwCreateWindowNative, GlfwCreateWindow>('glfwCreateWindow');
+    windowInstance = glfwCreateWindow(args[0].intVal, args[1].intVal, NativeString.fromString(args[2].stringValue), nullptr.cast(), nullptr.cast());
 
-    win = createWindow(args[0].intVal, args[1].intVal, NativeString.fromString(args[2].stringValue), nullptr.cast(), nullptr.cast());
+    return AnyNode();
   };
 
   object.classChildren.add(create);
 
-  final VarDefNode windowShldClse = VarDefNode();
-  windowShldClse.variableName = 'shouldClose';
-  windowShldClse.variableType = TypeNode();
-  windowShldClse.variableType.typeValue = initDataTypeAs(DATATYPE.DATA_TYPE_BOOL);
+  final FuncDefNode running = FuncDefNode();
+  running.funcName = 'running';
+  running.funcPointer = (_, __, ___) {
+    bool windowShouldClose;
 
-  final BoolNode windowshldclse = BoolNode();
-  windowshldclse.boolVal = false;
-  windowShldClse.variableValue = windowshldclse;
+    if (glfwWindowShouldClose(windowInstance) != GLFW_TRUE) {
+      windowShouldClose = true;
+    }
 
-  object.classChildren.add(windowShldClse);
+    else {
+      windowShouldClose = false;
+    }
+
+    return BoolNode()..boolVal = windowShouldClose;
+  };
+
+  object.classChildren.add(running);
 
   final FuncDefNode continueLoop = FuncDefNode();
 
   continueLoop.funcName = 'continueLoop';
   continueLoop.funcPointer = (Runtime runtime, ASTNode self, List<ASTNode> args) {
-    final void Function() glfwPollEvents = dylib.lookup<NativeFunction<Void Function()>>('glfwPollEvents')
-      .asFunction();
-
-    final void Function(Pointer<GLFWwindow> window) glfwSwapBuffers = dylib.lookup<NativeFunction<Void Function(Pointer<GLFWwindow> window)>>('glfwSwapBuffers')
-      .asFunction();
-
-    glfwSwapBuffers(win);
+    glfwSwapBuffers(windowInstance);
     glfwPollEvents();
+
+    return AnyNode();
   };
 
   object.classChildren.add(continueLoop);
