@@ -1,10 +1,34 @@
+/// Grab the ui package that helps us to make ui's [guis]!
 grab("birb:ui");
 
+/// Create a new window instance!
 var app = new Window;
 
+/// Initialize all of the backend [opengl]
 app.init();
+
+/// Now create the actual window!!!! Hurray!
 app.create(400, 400, "Hello World!");
 
+/// This is optional but it can straight away make your window transparent!!!
+/// Its sooo cool that we can do this in birb as even in electron we cannot do that (:
+app.setOpacity(1.0); 
+
+/// This is the loop where you will draw and clear stuff and this is called a [draw] loop.
 while (app.running()) {
-  app.continueLoop()
+  /// Clear the screen
+  /// Providing a color is [optional] but here is an example how you can do it!
+  app.clear(0.0, 0.0, 0.0); /// So if you provide no args it will default to black which is [0.0, 0.0, 0.0]. The args should be a double and in the format [r, g, b].
+
+  // Start Drawing Here
+
+  app.drawTriangle();
+
+  // End Drawing Here
+  
+  /// Here we swap the buffers and poll events. Stuff that birb auto does for you so no need to panic!
+  app.continueLoop();
 }
+
+/// Close all the window and uninit all of the backend.
+app.terminate();

@@ -2,8 +2,13 @@ import 'dart:ffi';
 import 'package:Birb/ast/ast_node.dart';
 import 'package:Birb/ast/ast_types.dart';
 import 'package:Birb/runtime/runtime.dart';
+
+import 'package:Birb/ui/gl/gl.dart';
 import 'package:Birb/ui/glfw/glfw.dart';
+
 import 'package:ffi_utils/ffi_utils.dart';
+
+typedef CallbackNative = Void Function(GLFWwindow, int, int, int, int);
 
 void registerUi(Runtime runtime) {
   registerGlobalVariable(runtime, 'Window', windowClass(runtime));
@@ -13,11 +18,14 @@ ASTNode windowClass(Runtime runtime) {
   final ClassNode object = ClassNode();
 
   Pointer windowInstance;
+  int width;
+  int height;
   
   final FuncDefNode init = FuncDefNode();
 
   init.funcName = 'init';
   init.funcPointer = (_, __, ___) {
+    initGlew();
     initGlfw();
     glfwInit();
 
@@ -29,10 +37,15 @@ ASTNode windowClass(Runtime runtime) {
   final FuncDefNode create = FuncDefNode();
 
   create.funcName = 'create';
-  create.funcPointer = (Runtime runtime, ASTNode self, List<ASTNode> args) {
+  create.funcPointer = (_, __, List<ASTNode> args) {
     expectArgs(args, [IntNode, IntNode, StringNode]);
 
     windowInstance = glfwCreateWindow(args[0].intVal, args[1].intVal, NativeString.fromString(args[2].stringValue), nullptr.cast(), nullptr.cast());
+
+    width = args[0].intVal;
+    height = args[1].intVal;
+
+    glfwMakeContextCurrent(windowInstance);
 
     return AnyNode();
   };
@@ -60,14 +73,69 @@ ASTNode windowClass(Runtime runtime) {
   final FuncDefNode continueLoop = FuncDefNode();
 
   continueLoop.funcName = 'continueLoop';
-  continueLoop.funcPointer = (Runtime runtime, ASTNode self, List<ASTNode> args) {
+  continueLoop.funcPointer = (_, __, ___) {
     glfwSwapBuffers(windowInstance);
     glfwPollEvents();
+    glFlush();
 
     return AnyNode();
   };
 
   object.classChildren.add(continueLoop);
+
+  final FuncDefNode terminate = FuncDefNode();
+
+  terminate.funcName = 'terminate';
+  terminate.funcPointer = (_, __, ___) {
+    glfwTerminate();
+
+    return AnyNode();
+  };
+
+  object.classChildren.add(terminate);
+
+  final FuncDefNode opacity = FuncDefNode();
+
+  opacity.funcName = 'setOpacity';
+  opacity.funcPointer = (_, __, List<ASTNode> args) {
+    expectArgs(args, [DoubleNode]);
+
+    glfwSetWindowOpacity(windowInstance, args[0].doubleVal);
+
+    return AnyNode();
+  };
+
+  object.classChildren.add(opacity);
+
+  final FuncDefNode clear = FuncDefNode();
+
+  clear.funcName = 'clear';
+  clear.funcPointer = (_, __, List<ASTNode> args) {
+    if (args.length > 1) {
+      expectArgs(args, [DoubleNode, DoubleNode, DoubleNode]);
+
+      glClearColor(args[0].doubleVal/255, args[1].doubleVal/255, args[2].doubleVal/255, 1);
+      glClear(GL_COLOR_BUFFER_BIT);
+    }
+    else {
+      glClear(GL_COLOR_BUFFER_BIT);
+    }
+
+    return AnyNode();
+  };
+
+  object.classChildren.add(clear);
+
+  final FuncDefNode drawTriangle = FuncDefNode();
+
+  drawTriangle.funcName = 'drawTriangle';
+  drawTriangle.funcPointer = (_, __, ___) {
+    
+
+    return AnyNode();
+  };
+
+  object.classChildren.add(drawTriangle);
 
   return object;
 } 

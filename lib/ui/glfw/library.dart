@@ -139,7 +139,7 @@ void initGlfw() {
   } 
   
   else {
-    throw UnsupportedError('unsupported platform ${Platform.operatingSystem}');
+    throw UnsupportedError('Unsupported platform ${Platform.operatingSystem}! This error should never happen so please report it as a new bug here: https://github.com/Calamity210/BirbLang/issues/new?assignees=Calamity210&labels=bug&template=bug_report.md&title=%5BBUG%5D');
   }
 
   glfwInit = tryCall(() => lib.lookupFunction<GlfwInitNative, GlfwInit>('glfwInit'));
