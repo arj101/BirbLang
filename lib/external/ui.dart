@@ -1,7 +1,6 @@
 import 'dart:ffi';
 import 'package:Birb/ast/ast_node.dart';
 import 'package:Birb/ast/ast_types.dart';
-import 'package:Birb/lexer/lexer.dart';
 import 'package:Birb/runtime/runtime.dart';
 
 import 'package:Birb/ui/gl/gl.dart';
@@ -114,10 +113,10 @@ ASTNode windowClass(Runtime runtime) {
 
   clear.funcName = 'clear';
   clear.funcPointer = (_, __, List<ASTNode> args) {
-    if (args.length > 1) {
-      expectArgs(args, [DoubleNode, DoubleNode, DoubleNode]);
+    if (args.length == 1) {
+      expectArgs(args, [ListNode]);
 
-      glClearColor(args[0].doubleVal/255, args[1].doubleVal/255, args[2].doubleVal/255, 1);
+      glClearColor(args[0].listElements[0].doubleVal/255, args[0].listElements[1].doubleVal/255, args[0].listElements[2].doubleVal/255, 1);
       glClear(GL_COLOR_BUFFER_BIT);
     }
     else {

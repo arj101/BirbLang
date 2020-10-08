@@ -1,1 +1,9 @@
 grab("dart:ui");
+
+class Colors{
+  const List black = [0.0, 0.0, 0.0];
+  const List white = [255.0, 255.0, 255.0];
+  const List red = [255.0, 0.0, 0.0];
+  const List green = [0.0, 255.0, 0.0];
+  const List green = [0.0, 0.0, 255.0];
+}
