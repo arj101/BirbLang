@@ -1,6 +1,7 @@
 import 'dart:ffi';
 import 'package:Birb/ast/ast_node.dart';
 import 'package:Birb/ast/ast_types.dart';
+import 'package:Birb/lexer/lexer.dart';
 import 'package:Birb/runtime/runtime.dart';
 
 import 'package:Birb/ui/gl/gl.dart';
@@ -46,6 +47,8 @@ ASTNode windowClass(Runtime runtime) {
     height = args[1].intVal;
 
     glfwMakeContextCurrent(windowInstance);
+
+    glViewport(0, 0, width, height);
 
     return AnyNode();
   };
@@ -126,16 +129,55 @@ ASTNode windowClass(Runtime runtime) {
 
   object.classChildren.add(clear);
 
+  final FuncDefNode drawPoint = FuncDefNode();
+
+  drawPoint.funcName = 'drawPoint';
+  drawPoint.funcPointer = (_, __, List<ASTNode> args) {
+    expectArgs(args, [DoubleNode, DoubleNode, DoubleNode]);
+
+    glPointSize(args[2].doubleVal);
+
+    glBegin(GL_POINTS);
+    glVertex2f(args[0].doubleVal/width, args[1].doubleVal/height);
+    glEnd();
+
+    return AnyNode();
+  };
+
+  object.classChildren.add(drawPoint);
+
   final FuncDefNode drawTriangle = FuncDefNode();
 
   drawTriangle.funcName = 'drawTriangle';
-  drawTriangle.funcPointer = (_, __, ___) {
-    
+  drawTriangle.funcPointer = (_, __, List<ASTNode> args) {
+    expectArgs(args, [DoubleNode, DoubleNode, DoubleNode, DoubleNode, DoubleNode, DoubleNode]);
+
+    glBegin(GL_TRIANGLES);
+    glVertex2f(args[0].doubleVal/width, args[1].doubleVal/height);
+    glVertex2f(args[2].doubleVal/width, args[3].doubleVal/height);
+    glVertex2f(args[4].doubleVal/width, args[5].doubleVal/height);
+    glEnd();
 
     return AnyNode();
   };
 
   object.classChildren.add(drawTriangle);
+
+  final FuncDefNode drawLine = FuncDefNode();
+
+  drawLine.funcName = 'drawLine';
+  drawLine.funcPointer = (_, __, List<ASTNode> args) {
+    expectArgs(args, [DoubleNode, DoubleNode, DoubleNode, DoubleNode]);
+
+    glBegin(GL_LINES);
+    glVertex2f(args[0].doubleVal/width, args[1].doubleVal/height);
+    glVertex2f(args[2].doubleVal/width, args[3].doubleVal/height);
+    glEnd();
+
+    return AnyNode();
+  };
+
+  object.classChildren.add(drawLine);
 
   return object;
 } 

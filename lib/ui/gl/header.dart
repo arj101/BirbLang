@@ -16,6 +16,11 @@ GlEnableClientState glEnableClientState;
 GlDisableClientState glDisableClientState;
 GlDrawArrays glDrawArrays;
 GlVertexPointer glVertexPointer;
+GlBegin glBegin;
+GlEnd glEnd;
+GlVertex2f glVertex2f;
+GlPointSize glPointSize;
+GlViewport glViewport;
 
 void initGlew() {
   DynamicLibrary library;
@@ -91,6 +96,31 @@ void initGlew() {
   glVertexPointer =  tryCall(() => library.lookupFunction<GlVertexPointerNative, GlVertexPointer>('glVertexPointer'));
   if (glVertexPointer == null && glGetProcAddress != null) {
     glVertexPointer =  tryCall(() => Pointer<NativeFunction<GlVertexPointerNative>>.fromAddress(glGetProcAddress(NativeString.fromString('glVertexPointer'))).asFunction<GlVertexPointer>());
+  }
+
+  glBegin =  tryCall(() => library.lookupFunction<GlBeginNative, GlBegin>('glBegin'));
+  if (glBegin == null && glGetProcAddress != null) {
+    glBegin =  tryCall(() => Pointer<NativeFunction<GlBeginNative>>.fromAddress(glGetProcAddress(NativeString.fromString('glBegin'))).asFunction<GlBegin>());
+  }
+
+  glEnd =  tryCall(() => library.lookupFunction<GlEndNative, GlEnd>('glEnd'));
+  if (glEnd == null && glGetProcAddress != null) {
+    glEnd =  tryCall(() => Pointer<NativeFunction<GlEndNative>>.fromAddress(glGetProcAddress(NativeString.fromString('glEnd'))).asFunction<GlEnd>());
+  }
+
+  glVertex2f =  tryCall(() => library.lookupFunction<GlVertex2fNative, GlVertex2f>('glVertex2f'));
+  if (glVertex2f == null && glGetProcAddress != null) {
+    glVertex2f =  tryCall(() => Pointer<NativeFunction<GlVertex2fNative>>.fromAddress(glGetProcAddress(NativeString.fromString('glVertex2f'))).asFunction<GlVertex2f>());
+  }
+
+  glPointSize =  tryCall(() => library.lookupFunction<GlPointSizeNative, GlPointSize>('glPointSize'));
+  if (glPointSize == null && glGetProcAddress != null) {
+    glPointSize =  tryCall(() => Pointer<NativeFunction<GlPointSizeNative>>.fromAddress(glGetProcAddress(NativeString.fromString('glPointSize'))).asFunction<GlPointSize>());
+  }
+
+  glViewport =  tryCall(() => library.lookupFunction<GlViewportNative, GlViewport>('glViewport'));
+  if (glViewport == null && glGetProcAddress != null) {
+    glViewport =  tryCall(() => Pointer<NativeFunction<GlViewportNative>>.fromAddress(glGetProcAddress(NativeString.fromString('glViewport'))).asFunction<GlViewport>());
   }
 }
 
