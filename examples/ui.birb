@@ -49,6 +49,8 @@ while (app.running()) {
     85.0, 75.0
   );
 
+  app.translate(5.0, 5.0);
+
   // End Drawing Here!
   
   /// Here we swap the buffers and poll events. Stuff that birb auto does for you so no need to panic!

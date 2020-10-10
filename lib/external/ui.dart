@@ -191,5 +191,18 @@ ASTNode windowClass(Runtime runtime) {
 
   object.classChildren.add(color);
 
+  final FuncDefNode translate = FuncDefNode();
+
+  translate.funcName = 'translate';
+  translate.funcPointer = (_, __, List<ASTNode> args) {
+    expectArgs(args, [DoubleNode, DoubleNode]);
+
+    glTranslatef(args[0].doubleVal/width, args[1].doubleVal/height, 0.0);
+
+    return AnyNode();
+  };
+
+  object.classChildren.add(translate);
+
   return object;
 } 

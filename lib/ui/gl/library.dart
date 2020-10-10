@@ -36,6 +36,9 @@ typedef GlPointSize = void Function(double size);
 typedef GlLoadIdentityNative = Void Function();
 typedef GlLoadIdentity = void Function();
 
+typedef GlTranslatefNative = Void Function(Float x, Float y, Float z);
+typedef GlTranslatef  = void Function(double x, double y, double z);
+
 typedef GlFlushNative = Void Function();
 typedef GlFlush = void Function();
 

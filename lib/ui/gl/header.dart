@@ -22,6 +22,7 @@ GlVertex2f glVertex2f;
 GlPointSize glPointSize;
 GlViewport glViewport;
 GlColor3f glColor3f;
+GlTranslatef glTranslatef;
 
 void initGlew() {
   DynamicLibrary library;
@@ -127,6 +128,11 @@ void initGlew() {
   glColor3f =  tryCall(() => library.lookupFunction<GlColor3fNative, GlColor3f>('glColor3f'));
   if (glColor3f == null && glGetProcAddress != null) {
     glColor3f =  tryCall(() => Pointer<NativeFunction<GlColor3fNative>>.fromAddress(glGetProcAddress(NativeString.fromString('glColor3f'))).asFunction<GlColor3f>());
+  }
+
+  glTranslatef =  tryCall(() => library.lookupFunction<GlTranslatefNative, GlTranslatef>('glTranslatef'));
+  if (glTranslatef == null && glGetProcAddress != null) {
+    glTranslatef =  tryCall(() => Pointer<NativeFunction<GlTranslatefNative>>.fromAddress(glGetProcAddress(NativeString.fromString('glTranslatef'))).asFunction<GlTranslatef>());
   }
 }
 
