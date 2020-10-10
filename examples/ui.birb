@@ -20,11 +20,17 @@ while (app.running()) {
   /// Providing a color is [optional] but here is an example how you can do it!
   /// So if you provide no args it will default to [Colors.black]. The args should be a double and in the format [r, g, b] or you can use the premade [Colors].
   app.clear(Colors.black);
-
+  
   // Start Drawing Here!
+
+  /// Set the color of the next shape that needs to be drawn.
+  app.setColor(Colors.white);
 
   /// This will draw a point in the center of the screen which is [0.0, 0.0] with the size of 1.0px
   app.drawPoint(0.0, 0.0, 1.0);
+
+  /// Lets make this triangle [Colors.red]
+  app.setColor(Colors.red);
 
   /// A triangle is a plane created by connecting three points. 
   /// The first two arguments specify the first point, the middle two arguments specify the second point, and the last two arguments specify the third point.
@@ -33,6 +39,9 @@ while (app.running()) {
     -86.0, -75.0,
     -58.0, -20.0
   );
+
+  /// Go back to the default color
+  app.setColor(Colors.white);
 
   /// Draws a line (a direct path between two points) to the screen.
   app.drawLine(

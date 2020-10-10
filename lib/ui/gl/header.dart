@@ -21,6 +21,7 @@ GlEnd glEnd;
 GlVertex2f glVertex2f;
 GlPointSize glPointSize;
 GlViewport glViewport;
+GlColor3f glColor3f;
 
 void initGlew() {
   DynamicLibrary library;
@@ -121,6 +122,11 @@ void initGlew() {
   glViewport =  tryCall(() => library.lookupFunction<GlViewportNative, GlViewport>('glViewport'));
   if (glViewport == null && glGetProcAddress != null) {
     glViewport =  tryCall(() => Pointer<NativeFunction<GlViewportNative>>.fromAddress(glGetProcAddress(NativeString.fromString('glViewport'))).asFunction<GlViewport>());
+  }
+
+  glColor3f =  tryCall(() => library.lookupFunction<GlColor3fNative, GlColor3f>('glColor3f'));
+  if (glColor3f == null && glGetProcAddress != null) {
+    glColor3f =  tryCall(() => Pointer<NativeFunction<GlColor3fNative>>.fromAddress(glGetProcAddress(NativeString.fromString('glColor3f'))).asFunction<GlColor3f>());
   }
 }
 

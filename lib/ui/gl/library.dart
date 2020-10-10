@@ -27,6 +27,9 @@ typedef GlVertex2f = void Function(double fst, double scnd);
 typedef GlClearColorNative = Void Function(Float r, Float g, Float b, Float a);
 typedef GlClearColor = void Function(double r, double g, double b, double a);
 
+typedef GlColor3fNative = Void Function(Float r, Float g, Float b, Float a);
+typedef GlColor3f = void Function(double r, double g, double b, double a);
+
 typedef GlPointSizeNative = Void Function(Float size);
 typedef GlPointSize = void Function(double size);
 

@@ -178,5 +178,18 @@ ASTNode windowClass(Runtime runtime) {
 
   object.classChildren.add(drawLine);
 
+  final FuncDefNode color = FuncDefNode();
+
+  color.funcName = 'setColor';
+  color.funcPointer = (_, __, List<ASTNode> args) {
+    expectArgs(args, [ListNode]);
+
+    glColor3f(args[0].listElements[0].doubleVal/255, args[0].listElements[1].doubleVal/255, args[0].listElements[2].doubleVal/255, 1);
+
+    return AnyNode();
+  };
+
+  object.classChildren.add(color);
+
   return object;
 } 
