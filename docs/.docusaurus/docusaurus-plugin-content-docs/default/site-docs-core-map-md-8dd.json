@@ -9,15 +9,15 @@
   "permalink": "/docs/Core/map",
   "editUrl": "https://github.com/Calamity210/BirbLang/edit/master/docs/docs/Core/map.md",
   "version": "current",
-  "lastUpdatedBy": "Calamity210",
-  "lastUpdatedAt": 1600028216,
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
   "sidebar": "BirbLang",
   "previous": {
     "title": "int",
     "permalink": "/docs/Core/int"
   },
   "next": {
-    "title": "Contributing",
-    "permalink": "/docs/contributing"
+    "title": "double",
+    "permalink": "/docs/Core/double"
   }
 }

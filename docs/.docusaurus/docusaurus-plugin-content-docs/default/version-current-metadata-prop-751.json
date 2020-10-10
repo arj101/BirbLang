@@ -33,6 +33,11 @@
                 "type": "link",
                 "label": "Map",
                 "href": "/docs/Core/map"
+              },
+              {
+                "type": "link",
+                "label": "double",
+                "href": "/docs/Core/double"
               }
             ]
           }
@@ -54,15 +59,29 @@
             "href": "/docs/walkthrough"
           }
         ]
+      },
+      {
+        "collapsed": true,
+        "type": "category",
+        "label": "Libraries",
+        "items": [
+          {
+            "type": "link",
+            "label": "UI",
+            "href": "/docs/UI"
+          }
+        ]
       }
     ]
   },
   "permalinkToSidebar": {
     "/docs/contributing": "BirbLang",
     "/docs/walkthrough": "BirbLang",
+    "/docs/Core/double": "BirbLang",
     "/docs/Core/int": "BirbLang",
     "/docs/Core/map": "BirbLang",
     "/docs/Core/string": "BirbLang",
+    "/docs/UI": "BirbLang",
     "/docs/": "BirbLang"
   }
 }

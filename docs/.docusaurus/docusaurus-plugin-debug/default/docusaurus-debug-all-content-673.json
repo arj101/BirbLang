@@ -8,8 +8,8 @@
           "versionPath": "/docs",
           "isLast": true,
           "routePriority": -1,
-          "sidebarFilePath": "C:\\Users\\User\\Projects\\BirbLang\\docs\\sidebars.js",
-          "docsDirPath": "C:\\Users\\User\\Projects\\BirbLang\\docs\\docs",
+          "sidebarFilePath": "C:\\Users\\user\\Desktop\\Andy\\Projects\\Birb\\BirbLang\\docs\\sidebars.js",
+          "docsDirPath": "C:\\Users\\user\\Desktop\\Andy\\Projects\\Birb\\BirbLang\\docs\\docs",
           "mainDocId": "tour",
           "sidebars": {
             "BirbLang": [
@@ -38,6 +38,10 @@
                       {
                         "type": "doc",
                         "id": "Core/map"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "Core/double"
                       }
                     ]
                   }
@@ -57,15 +61,28 @@
                     "id": "Contribute/walkthrough"
                   }
                 ]
+              },
+              {
+                "collapsed": true,
+                "type": "category",
+                "label": "Libraries",
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "Libraries/UI"
+                  }
+                ]
               }
             ]
           },
           "permalinkToSidebar": {
             "/docs/contributing": "BirbLang",
             "/docs/walkthrough": "BirbLang",
+            "/docs/Core/double": "BirbLang",
             "/docs/Core/int": "BirbLang",
             "/docs/Core/map": "BirbLang",
             "/docs/Core/string": "BirbLang",
+            "/docs/UI": "BirbLang",
             "/docs/": "BirbLang"
           },
           "docs": [
@@ -85,8 +102,8 @@
               "sidebar_label": "Contributing",
               "sidebar": "BirbLang",
               "previous": {
-                "title": "Map",
-                "permalink": "/docs/Core/map"
+                "title": "double",
+                "permalink": "/docs/Core/double"
               },
               "next": {
                 "title": "Walkthrough",
@@ -109,6 +126,33 @@
               "sidebar_label": "Walkthrough",
               "sidebar": "BirbLang",
               "previous": {
+                "title": "Contributing",
+                "permalink": "/docs/contributing"
+              },
+              "next": {
+                "title": "birb:ui",
+                "permalink": "/docs/UI"
+              }
+            },
+            {
+              "unversionedId": "Core/double",
+              "id": "Core/double",
+              "isDocsHomePage": false,
+              "title": "double",
+              "description": "A 64-bit double-precision floating-point number as specified in the IEEE 754 standard.",
+              "source": "@site/docs\\Core\\double.md",
+              "slug": "/Core/double",
+              "permalink": "/docs/Core/double",
+              "editUrl": "https://github.com/Calamity210/BirbLang/edit/master/docs/docs/Core/double.md",
+              "version": "current",
+              "lastUpdatedBy": "Author",
+              "lastUpdatedAt": 1539502055,
+              "sidebar": "BirbLang",
+              "previous": {
+                "title": "Map",
+                "permalink": "/docs/Core/map"
+              },
+              "next": {
                 "title": "Contributing",
                 "permalink": "/docs/contributing"
               }
@@ -155,8 +199,8 @@
                 "permalink": "/docs/Core/int"
               },
               "next": {
-                "title": "Contributing",
-                "permalink": "/docs/contributing"
+                "title": "double",
+                "permalink": "/docs/Core/double"
               }
             },
             {
@@ -180,6 +224,26 @@
               "next": {
                 "title": "int",
                 "permalink": "/docs/Core/int"
+              }
+            },
+            {
+              "unversionedId": "Libraries/UI",
+              "id": "Libraries/UI",
+              "isDocsHomePage": false,
+              "title": "birb:ui",
+              "description": "Create GUI applications in Birb Language! Birb UI is backed by OpenGL",
+              "source": "@site/docs\\Libraries\\UI.md",
+              "slug": "/UI",
+              "permalink": "/docs/UI",
+              "editUrl": "https://github.com/Calamity210/BirbLang/edit/master/docs/docs/Libraries/UI.md",
+              "version": "current",
+              "lastUpdatedBy": "Author",
+              "lastUpdatedAt": 1539502055,
+              "sidebar_label": "UI",
+              "sidebar": "BirbLang",
+              "previous": {
+                "title": "Walkthrough",
+                "permalink": "/docs/walkthrough"
               }
             },
             {
@@ -214,8 +278,8 @@
           "versionPath": "/community",
           "isLast": true,
           "routePriority": -1,
-          "sidebarFilePath": "C:\\Users\\User\\Projects\\BirbLang\\docs\\sidebarsCommunity.js",
-          "docsDirPath": "C:\\Users\\User\\Projects\\BirbLang\\docs\\community",
+          "sidebarFilePath": "C:\\Users\\user\\Desktop\\Andy\\Projects\\Birb\\BirbLang\\docs\\sidebarsCommunity.js",
+          "docsDirPath": "C:\\Users\\user\\Desktop\\Andy\\Projects\\Birb\\BirbLang\\docs\\community",
           "mainDocId": "support",
           "sidebars": {
             "community": [
@@ -267,7 +331,7 @@
   "docusaurus-theme-classic": {
     "default": null
   },
-  "docusaurus-theme-search-algolia": {
+  "@cmfcmf/docusaurus-search-local": {
     "default": null
   },
   "docusaurus-theme-live-codeblock": {

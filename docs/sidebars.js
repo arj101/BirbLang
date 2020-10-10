@@ -23,5 +23,12 @@ module.exports = {
             'Contribute/walkthrough'
          ],
         },
+        {
+          type: 'category',
+          label: 'Libraries',
+          items: [
+             'Libraries/UI'
+          ],
+         },
     ]
 };

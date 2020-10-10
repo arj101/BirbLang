@@ -9,13 +9,13 @@
   "permalink": "/docs/contributing",
   "editUrl": "https://github.com/Calamity210/BirbLang/edit/master/docs/docs/Contribute/contribute.md",
   "version": "current",
-  "lastUpdatedBy": "Calamity210",
-  "lastUpdatedAt": 1600028216,
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
   "sidebar_label": "Contributing",
   "sidebar": "BirbLang",
   "previous": {
-    "title": "Map",
-    "permalink": "/docs/Core/map"
+    "title": "double",
+    "permalink": "/docs/Core/double"
   },
   "next": {
     "title": "Walkthrough",

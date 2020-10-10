@@ -1,0 +1,20 @@
+{
+  "unversionedId": "Libraries/UI",
+  "id": "Libraries/UI",
+  "isDocsHomePage": false,
+  "title": "birb:ui",
+  "description": "Create GUI applications in Birb Language! Birb UI is backed by OpenGL",
+  "source": "@site/docs\\Libraries\\UI.md",
+  "slug": "/UI",
+  "permalink": "/docs/UI",
+  "editUrl": "https://github.com/Calamity210/BirbLang/edit/master/docs/docs/Libraries/UI.md",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar_label": "UI",
+  "sidebar": "BirbLang",
+  "previous": {
+    "title": "Walkthrough",
+    "permalink": "/docs/walkthrough"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "unversionedId": "Libraries/ui",
+  "id": "Libraries/ui",
+  "isDocsHomePage": false,
+  "title": "ui",
+  "description": "",
+  "source": "@site/docs\\Libraries\\ui.md",
+  "slug": "/Libraries/ui",
+  "permalink": "/docs/Libraries/ui",
+  "editUrl": "https://github.com/Calamity210/BirbLang/edit/master/docs/docs/Libraries/ui.md",
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055,
+  "sidebar": "BirbLang",
+  "previous": {
+    "title": "Walkthrough",
+    "permalink": "/docs/walkthrough"
+  }
+}

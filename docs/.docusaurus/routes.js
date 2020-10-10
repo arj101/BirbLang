@@ -8,6 +8,41 @@ export default [
   exact: true,
 },
 {
+  path: '/__docusaurus/debug',
+  component: ComponentCreator('/__docusaurus/debug','3d6'),
+  exact: true,
+},
+{
+  path: '/__docusaurus/debug/config',
+  component: ComponentCreator('/__docusaurus/debug/config','914'),
+  exact: true,
+},
+{
+  path: '/__docusaurus/debug/content',
+  component: ComponentCreator('/__docusaurus/debug/content','d12'),
+  exact: true,
+},
+{
+  path: '/__docusaurus/debug/globalData',
+  component: ComponentCreator('/__docusaurus/debug/globalData','3cf'),
+  exact: true,
+},
+{
+  path: '/__docusaurus/debug/metadata',
+  component: ComponentCreator('/__docusaurus/debug/metadata','31b'),
+  exact: true,
+},
+{
+  path: '/__docusaurus/debug/registry',
+  component: ComponentCreator('/__docusaurus/debug/registry','0da'),
+  exact: true,
+},
+{
+  path: '/__docusaurus/debug/routes',
+  component: ComponentCreator('/__docusaurus/debug/routes','244'),
+  exact: true,
+},
+{
   path: '/community',
   component: ComponentCreator('/community','ee3'),
   
@@ -21,7 +56,7 @@ export default [
 },
 {
   path: '/docs',
-  component: ComponentCreator('/docs','497'),
+  component: ComponentCreator('/docs','54a'),
   
   routes: [
 {
@@ -32,6 +67,11 @@ export default [
 {
   path: '/docs/contributing',
   component: ComponentCreator('/docs/contributing','024'),
+  exact: true,
+},
+{
+  path: '/docs/Core/double',
+  component: ComponentCreator('/docs/Core/double','46a'),
   exact: true,
 },
 {
@@ -47,6 +87,11 @@ export default [
 {
   path: '/docs/Core/string',
   component: ComponentCreator('/docs/Core/string','788'),
+  exact: true,
+},
+{
+  path: '/docs/UI',
+  component: ComponentCreator('/docs/UI','533'),
   exact: true,
 },
 {

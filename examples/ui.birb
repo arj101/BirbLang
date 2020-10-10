@@ -46,5 +46,5 @@ while (app.running()) {
   app.continueLoop();
 }
 
-/// Close all the window and uninit all of the backend.
+// Terminate the window. You can also use `io.exit()` but that will terminate the whole app.
 app.terminate();
