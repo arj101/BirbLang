@@ -12,10 +12,16 @@ app.create(600, 600, "Hello World!");
 
 /// This is optional but it can straight away make your window transparent!!!
 /// Its sooo cool that we can do this in birb as even in electron we cannot do that (:
-app.setOpacity(1.0); 
+app.setOpacity(1.0);
+
+void keyCallback(int key) {
+  scremLn(key);
+}
 
 /// This is the loop where you will draw and clear stuff and this is called a [draw] loop.
 while (app.running()) {
+  app.onKeyPress(keyCallback);
+
   /// Clear the screen
   /// Providing a color is [optional] but here is an example how you can do it!
   /// So if you provide no args it will default to [Colors.black]. The args should be a double and in the format [r, g, b] or you can use the premade [Colors].

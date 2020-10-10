@@ -8,10 +8,19 @@ import 'package:Birb/ui/glfw/glfw.dart';
 
 import 'package:ffi_utils/ffi_utils.dart';
 
-typedef CallbackNative = Void Function(GLFWwindow, int, int, int, int);
+Map keyCall = {};
 
 void registerUi(Runtime runtime) {
   registerGlobalVariable(runtime, 'Window', windowClass(runtime));
+}
+
+void keyCallback(Pointer<GLFWwindow> window, int key, int scancode, int action, int mods) {
+  final call = FuncCallNode();
+  call.funcName = keyCall['func'].funcName;
+  call.functionCallArgs = [IntNode()..intVal = key];
+  call.funcCallExpression = VariableNode()..variableName = keyCall['func'].funcName;
+
+  visitFuncCall(keyCall['runtime'], call);
 }
 
 ASTNode windowClass(Runtime runtime) {
@@ -230,6 +239,19 @@ ASTNode windowClass(Runtime runtime) {
 
   object.classChildren.add(pop);
 
+  final FuncDefNode onKeyPress = FuncDefNode();
+
+  onKeyPress.funcName = 'onKeyPress';
+  onKeyPress.funcPointer = (_, __, List<ASTNode> args) {
+    expectArgs(args, [FuncDefNode]);
+    keyCall['func'] = args[0]; 
+    keyCall['runtime'] = runtime;
+    glfwSetKeyCallback(windowInstance, Pointer.fromFunction<Void Function(Pointer<GLFWwindow> window, Int32 key, Int32 scancode, Int32 action, Int32 mods)>(keyCallback));
+
+    return AnyNode();
+  };
+
+  object.classChildren.add(onKeyPress);
 
   return object;
-} 
+}
