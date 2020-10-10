@@ -127,15 +127,20 @@ void initGlfw() {
   DynamicLibrary lib;
 
   if (Platform.isWindows) {
-    lib = DynamicLibrary.open(r'lib\glfw3.dll');
+    try {
+      lib = DynamicLibrary.open(r'lib\vendor\glfw3-64.dll');
+    }
+    catch (e){
+      lib = DynamicLibrary.open(r'lib\vendor\glfw3-32.dll'); 
+    }
   } 
 
   else if (Platform.isMacOS) {
-    lib = DynamicLibrary.open('lib/glfw3.dylib');
+    lib = DynamicLibrary.open('lib/vendor/glfw3.dylib');
   }
 
   else if (Platform.isLinux) {
-    lib = DynamicLibrary.open('lib/glfw3.so');
+    lib = DynamicLibrary.open('lib/vendor/glfw3.so');
   } 
   
   else {
