@@ -104,6 +104,23 @@ while (app.running()) {
 }
 ```
 
+### setColor
+`void setColor({List color})`
+
+Set the color of the next shape that needs to be drawn. Defaults to `Colors.white`
+
+#### Example
+```dart
+var app = new Window;
+
+app.init();
+app.create(600, 600, "Hello World!");
+
+while (app.running()) {
+    app.setColor(Colors.red);
+}
+```
+
 ### terminate
 `void terminate()`
 
