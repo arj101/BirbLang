@@ -204,5 +204,32 @@ ASTNode windowClass(Runtime runtime) {
 
   object.classChildren.add(translate);
 
+  final FuncDefNode push = FuncDefNode();
+
+  push.funcName = 'push';
+  push.funcPointer = (_, __, List<ASTNode> args) {
+    expectArgs(args, []);
+
+    glPushMatrix();
+
+    return AnyNode();
+  };
+
+  object.classChildren.add(push);
+
+  final FuncDefNode pop = FuncDefNode();
+
+  pop.funcName = 'pop';
+  pop.funcPointer = (_, __, List<ASTNode> args) {
+    expectArgs(args, []);
+
+    glPopMatrix();
+
+    return AnyNode();
+  };
+
+  object.classChildren.add(pop);
+
+
   return object;
 } 

@@ -23,6 +23,8 @@ GlPointSize glPointSize;
 GlViewport glViewport;
 GlColor3f glColor3f;
 GlTranslatef glTranslatef;
+GlPushMatrix glPushMatrix;
+GlPopMatrix glPopMatrix;
 
 void initGlew() {
   DynamicLibrary library;
@@ -133,6 +135,16 @@ void initGlew() {
   glTranslatef =  tryCall(() => library.lookupFunction<GlTranslatefNative, GlTranslatef>('glTranslatef'));
   if (glTranslatef == null && glGetProcAddress != null) {
     glTranslatef =  tryCall(() => Pointer<NativeFunction<GlTranslatefNative>>.fromAddress(glGetProcAddress(NativeString.fromString('glTranslatef'))).asFunction<GlTranslatef>());
+  }
+
+  glPushMatrix =  tryCall(() => library.lookupFunction<GlPushMatrixNative, GlPushMatrix>('glPushMatrix'));
+  if (glPushMatrix == null && glGetProcAddress != null) {
+    glPushMatrix =  tryCall(() => Pointer<NativeFunction<GlPushMatrixNative>>.fromAddress(glGetProcAddress(NativeString.fromString('glPushMatrix'))).asFunction<GlPushMatrix>());
+  }
+
+  glPopMatrix =  tryCall(() => library.lookupFunction<GlPopMatrixNative, GlPopMatrix>('glPopMatrix'));
+  if (glPopMatrix == null && glGetProcAddress != null) {
+    glPopMatrix =  tryCall(() => Pointer<NativeFunction<GlPopMatrixNative>>.fromAddress(glGetProcAddress(NativeString.fromString('glPopMatrix'))).asFunction<GlPopMatrix>());
   }
 }
 

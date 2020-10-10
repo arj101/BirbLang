@@ -49,7 +49,15 @@ while (app.running()) {
     85.0, 75.0
   );
 
-  app.translate(5.0, 5.0);
+  /// We generally do push and pop so the shapes and drawing functions that we do in between these two functions do not affect the whole canvas.
+  /// Push the matrix
+  app.push();
+  
+  app.translate(100.0, 100.0);
+  app.drawPoint(0.0, 0.0, 1.0);
+
+  /// Pop the matrix
+  app.pop();
 
   // End Drawing Here!
   

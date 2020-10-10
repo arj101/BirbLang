@@ -37,7 +37,13 @@ typedef GlLoadIdentityNative = Void Function();
 typedef GlLoadIdentity = void Function();
 
 typedef GlTranslatefNative = Void Function(Float x, Float y, Float z);
-typedef GlTranslatef  = void Function(double x, double y, double z);
+typedef GlTranslatef = void Function(double x, double y, double z);
+
+typedef GlPushMatrixNative = Void Function();
+typedef GlPushMatrix = void Function();
+
+typedef GlPopMatrixNative = Void Function();
+typedef GlPopMatrix = void Function();
 
 typedef GlFlushNative = Void Function();
 typedef GlFlush = void Function();
