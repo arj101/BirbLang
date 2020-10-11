@@ -14,8 +14,17 @@ app.create(600, 600, "Hello World!");
 /// Its sooo cool that we can do this in birb as even in electron we cannot do that (:
 app.setOpacity(1.0);
 
-void keyCallback(int key) {
-  scremLn(key);
+bool show = false;
+
+void keyCallback(int key, int action) {
+  if (key == Keys.Space) {
+    if (action == Events.keyDown || action == Events.keyRepeat) {
+      show = true;
+    }
+    else {
+      show = false;
+    }
+  }
 }
 
 /// This is the loop where you will draw and clear stuff and this is called a [draw] loop.
@@ -64,6 +73,17 @@ while (app.running()) {
 
   /// Pop the matrix
   app.pop();
+
+  /// Push the matrix
+  app.push();
+  
+  if (show) {
+    app.translate(200.0, 0.0);
+    app.drawPoint(0.0, 0.0, 20.0);
+  }
+
+  app.pop();
+  /// Pop the matrix
 
   // End Drawing Here!
   

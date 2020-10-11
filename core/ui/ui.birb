@@ -9,6 +9,7 @@ class Colors{
 }
 
 class Keys {
+  const int Space = 32;
   const int Key_0 = 48;
   const int Key_1 = 49;
   const int Key_2 = 50;
@@ -123,11 +124,17 @@ class Keys {
   const int RIGHT_ALT = 346;
   const int RIGHT_SUPER = 347;
   const int MENU = 348;
-  const int LAST = GLFW_KEY_MENU;
+  const int LAST = MENU;
   const int SHIFT = 0x0001;
   const int CONTROL = 0x0002;
   const int ALT = 0x0004;
   const int SUPER = 0x0008;
   const int CAPS_LOCK = 0x0010;
   const int NUM_LOCK = 0x0020;
+}
+
+class Events{
+  const int keyUp = 0;
+  const int keyDown = 1;
+  const int keyRepeat = 2;
 }

@@ -17,7 +17,7 @@ void registerUi(Runtime runtime) {
 void keyCallback(Pointer<GLFWwindow> window, int key, int scancode, int action, int mods) {
   final call = FuncCallNode();
   call.funcName = keyCall['func'].funcName;
-  call.functionCallArgs = [IntNode()..intVal = key];
+  call.functionCallArgs = [IntNode()..intVal = key, IntNode()..intVal = action];
   call.funcCallExpression = VariableNode()..variableName = keyCall['func'].funcName;
 
   visitFuncCall(keyCall['runtime'], call);
