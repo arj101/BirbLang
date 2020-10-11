@@ -9,6 +9,7 @@ import 'package:Birb/ui/glfw/glfw.dart';
 import 'package:ffi_utils/ffi_utils.dart';
 
 Map keyCall = {};
+Map mouseCall = {};
 
 void registerUi(Runtime runtime) {
   registerGlobalVariable(runtime, 'Window', windowClass(runtime));
@@ -21,6 +22,15 @@ void keyCallback(Pointer<GLFWwindow> window, int key, int scancode, int action, 
   call.funcCallExpression = VariableNode()..variableName = keyCall['func'].funcName;
 
   visitFuncCall(keyCall['runtime'], call);
+}
+
+void mouseCallback(Pointer<GLFWwindow> window, int xPos, int yPos) {
+  final call = FuncCallNode();
+  call.funcName = mouseCall['func'].funcName;
+  call.functionCallArgs = [IntNode()..intVal = xPos, IntNode()..intVal = yPos];
+  call.funcCallExpression = VariableNode()..variableName = mouseCall['func'].funcName;
+
+  visitFuncCall(mouseCall['runtime'], call);
 }
 
 ASTNode windowClass(Runtime runtime) {
@@ -252,6 +262,20 @@ ASTNode windowClass(Runtime runtime) {
   };
 
   object.classChildren.add(onKeyPress);
+
+  final FuncDefNode onMouseEvent = FuncDefNode();
+
+  onMouseEvent.funcName = 'onMouseEvent';
+  onMouseEvent.funcPointer = (_, __, List<ASTNode> args) {
+    expectArgs(args, [FuncDefNode]);
+    mouseCall['func'] = args[0]; 
+    mouseCall['runtime'] = runtime;
+    glfwSetCursorPosCallback(windowInstance, Pointer.fromFunction<Void Function(Pointer<GLFWwindow> window, IntPtr x, IntPtr y)>(mouseCallback));
+
+    return AnyNode();
+  };
+
+  object.classChildren.add(onMouseEvent);
 
   return object;
 }

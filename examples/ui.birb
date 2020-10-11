@@ -27,9 +27,14 @@ void keyCallback(int key, int action) {
   }
 }
 
+void mouseCallback(int mouseX, int mouseY) {
+  scremLn(mouseX + " : " + mouseY);
+}
+
 /// This is the loop where you will draw and clear stuff and this is called a [draw] loop.
 while (app.running()) {
   app.onKeyPress(keyCallback);
+  app.onMouseEvent(mouseCallback);
 
   /// Clear the screen
   /// Providing a color is [optional] but here is an example how you can do it!
